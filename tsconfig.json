@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "ES5",
+    "outDir": "./dist",
+    //si queremos usar REACT con imports de typescript (ecmascript) necesitamos que este en true.
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "jsx": "react-jsx"
+  },
+  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
+}
