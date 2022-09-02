@@ -4,12 +4,11 @@ import { SearchForm } from "../search-form/SearchForm";
 const benji: User = {
   name: "benja",
 };
-import css from "./layout.css";
 
 export function Layout(props) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <SearchForm style={css.root} />
+      <SearchForm style={{ backgroundColor: "red" }} />
       <Outlet />
     </Suspense>
   );

@@ -11,7 +11,7 @@ export function PageThree() {
 
   return (
     <SlideShow
-      images={results.map((e) => e.url)}
+      images={results}
       width="920px"
       imagesWidth="800px"
       imagesHeight="450px"
