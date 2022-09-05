@@ -16,7 +16,7 @@ module.exports = {
     rules: [
       { test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/ },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [
           "style-loader",
           {
@@ -29,7 +29,7 @@ module.exports = {
       },
     ],
   },
-  resolve: { extensions: [".tsx", ".js", ".ts"] },
+  resolve: { extensions: [".tsx", ".js", ".ts", ".css"] },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
