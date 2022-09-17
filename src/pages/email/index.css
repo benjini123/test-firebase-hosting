@@ -1,0 +1,10 @@
+.emailPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  width: 100%;
+  max-width: 335px;
+  justify-content: space-evenly;
+  margin: auto;
+}

@@ -1,23 +1,41 @@
 import { atom, selector } from "recoil";
 
-export const queryState = atom({
-  key: "query",
-  default: "",
+export const petAtom = atom({
+  key: "pets",
+  default: null,
 });
 
-export const resultsState = selector({
-  key: "searchResults",
-  get: async ({ get }) => {
-    const valorDeQuery = get(queryState);
-    if (valorDeQuery) {
-      const res = await fetch(
-        "https://api.mercadolibre.com/sites/MLA/search?q=" + valorDeQuery
-      );
-      const json = await res.json();
-
-      return json.results;
-    } else {
-      return [];
-    }
+export const loginState = atom({
+  key: "loginData",
+  default: {
+    email: null,
+    name: null,
+    password: null,
+    token: null,
+    userId: null,
   },
 });
+
+// export const resultsState = selector({
+//   key: "loginDataSelector",
+//   get: async ({ get }) => {
+//     const petList = get(petAtom);
+//     if (petList) {
+//       return;
+//     } else {
+//       return [];
+//     }
+//   },
+// });
+
+// export const resultsState = selector({
+//   key: "searchResults",
+//   get: async ({ get }) => {
+//     const petList = get(petAtom);
+//     if (petList) {
+//       return;
+//     } else {
+//       return [];
+//     }
+//   },
+// });

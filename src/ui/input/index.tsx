@@ -1,11 +1,16 @@
 import { Caption } from "../../ui/texts";
 import css from "./index.css";
 
-export function TextField(props) {
+export function Input(props) {
   return (
     <div className={css.container}>
       <Caption>{props.children}</Caption>
-      <textarea className={css.textarea} name={props.name} />
+      <input
+        className={css.input}
+        type={props.type}
+        name={props.name}
+        defaultValue={props.value}
+      />
     </div>
   );
 }

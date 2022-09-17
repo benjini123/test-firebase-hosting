@@ -27,6 +27,12 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          { loader: "file-loader", options: { name: "assets/[hash].[ext]" } },
+        ],
+      },
     ],
   },
   resolve: { extensions: [".tsx", ".js", ".ts", ".css"] },

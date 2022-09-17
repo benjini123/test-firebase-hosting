@@ -1,0 +1,17 @@
+.datosPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 400px;
+  width: 100%;
+  max-width: 335px;
+  justify-content: space-evenly;
+  /* align-items: center; */
+  margin: auto;
+}
+
+.contraseñas{
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+}
