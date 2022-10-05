@@ -35,9 +35,11 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.2",
     "react-image-show": "^0.3.4",
+    "react-map-gl-geocoder": "^2.2.0",
     "react-mapbox-gl": "^5.1.1",
     "react-router-dom": "^6.3.0",
     "recoil": "^0.7.5",
+    "recoil-persist": "^4.2.0",
     "style-loader": "^3.3.1"
   }
 }

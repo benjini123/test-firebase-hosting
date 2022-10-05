@@ -4,7 +4,6 @@ import css from "./index.css";
 import { PetCard } from "../../components/pet-card";
 import { petAtom } from "../../atoms";
 import { useRecoilState } from "recoil";
-import { findPets } from "../../hooks";
 import { useState } from "react";
 import { getPetsApi, setFormApi } from "../../lib/api";
 import { ReportPetForm } from "../../components/reportPet";
@@ -62,7 +61,7 @@ export function Home() {
               petName={e.name}
               petImage={e.url}
               petLocation={e.location}
-              handleClick={() => {
+              onReport={() => {
                 showForm(key);
               }}></PetCard>
           );

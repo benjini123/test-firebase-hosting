@@ -36,7 +36,14 @@ export function Datos() {
     } else {
       const userId = await signUpApi(name, password, email);
       const token = await signIn(email, password);
+
+      localStorage.setItem(
+        "loginData",
+        JSON.stringify({ name, email, password, userId, token })
+      );
+
       setUser({ ...user, name, password, token, userId });
+      console.log("user with name: " + name + "has successfully been created");
       navigate("/");
     }
   };

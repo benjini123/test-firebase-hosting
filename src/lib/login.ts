@@ -29,8 +29,9 @@ export async function signUpApi(name, password, email) {
     body: JSON.stringify({ name, password, email }),
     headers: { "Content-Type": "application/json" },
   });
-  const authData = await auth.json();
-  return authData;
+
+  const userId = await auth.json();
+  return userId;
 }
 
 export async function updateUser(name, password, email) {
@@ -39,6 +40,7 @@ export async function updateUser(name, password, email) {
     body: JSON.stringify({ name, password, email }),
     headers: { "Content-Type": "application/json" },
   });
+
   const updateResData = await updateRes.json();
   return updateResData;
 }

@@ -1,0 +1,9 @@
+.container{
+  position: relative;
+}
+
+.img{
+  overflow: hidden;
+  max-width: 333px;
+  max-height: 142px;
+}

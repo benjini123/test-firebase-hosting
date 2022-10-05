@@ -1,0 +1,12 @@
+.reportadasPage{
+  padding: 20px;
+}
+
+.petsContainer{
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+
+} 

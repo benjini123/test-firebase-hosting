@@ -7,18 +7,25 @@ import { Subtitle, Title } from "../../ui/texts";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { LinkText } from "../../ui/texts";
-import { loginState } from "../../atoms";
+import { editMode, loginState, petState } from "../../atoms";
 
 export function Navbar(props) {
   const [display, setDisplay] = useState(false);
   const user = useRecoilValue(loginState);
-  const token = user.token;
+  const [edit, setEdit] = useRecoilState(editMode);
+  const [pet, setPet] = useRecoilState(petState);
+  const token = user.token ? user.token : null;
+  const navigate = useNavigate();
 
   const signOut = () => {
-    //HACER
+    localStorage.removeItem("loginData");
+    window.location.reload();
+    navigate("/");
   };
 
   function toggleDisplay() {
+    setEdit(false);
+    setPet({ ...pet, url: null });
     setDisplay(!display);
   }
 

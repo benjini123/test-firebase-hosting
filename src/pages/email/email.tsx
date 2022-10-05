@@ -19,10 +19,13 @@ export function Email() {
     const userExists = await findUser(email);
 
     if (userExists) {
-      setUser({ ...user, email, name: userExists.name });
+      const { name, id } = userExists;
+      setUser({ ...user, email, name, userId: id });
+
       navigate("/password");
     } else {
       setUser({ ...user, email });
+
       navigate("/datos");
     }
   };

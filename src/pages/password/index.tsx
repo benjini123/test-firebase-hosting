@@ -14,9 +14,14 @@ export function Password() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const password = e.target.password.value;
+    const { email, name, userId } = user;
 
-    const token = await signIn(user.email, password);
+    const token = await signIn(email, password);
     if (token) {
+      localStorage.setItem(
+        "loginData",
+        JSON.stringify({ token, password, email, name, userId })
+      );
       setUser({ ...user, token, password });
       navigate("/");
     } else {

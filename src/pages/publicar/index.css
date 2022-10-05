@@ -1,0 +1,23 @@
+.publicarForm{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 370px;
+  padding-left: 22px;
+  padding-right: 22px;
+  margin: auto;
+  gap: 10px;
+}
+
+.buttonGroup{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.locationContainer{
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-gap: 7px;
+  align-items: flex-end;
+}
