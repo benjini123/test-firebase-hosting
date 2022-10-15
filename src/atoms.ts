@@ -8,12 +8,13 @@ export const petAtom = atom({
 export const petState = atom({
   key: "currentPet",
   default: {
+    id: null,
     url: null,
-    preview: null,
     name: null,
     location: null,
-    latitud: null,
-    longitud: null,
+    lat: null,
+    lng: null,
+    userId: null,
   },
 });
 

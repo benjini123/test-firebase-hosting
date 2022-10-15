@@ -29,6 +29,10 @@
   height: 40px;
 }
 
+.link{
+  text-decoration: none;
+}
+
 .displayedNavBar{
   height: 100vh;
   width: 100%;

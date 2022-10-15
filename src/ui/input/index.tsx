@@ -6,6 +6,7 @@ export function Input(props) {
     <div className={css.container}>
       <Caption>{props.children}</Caption>
       <input
+        placeholder={props.placeholder}
         onChange={props.onChange}
         className={css.input}
         type={props.type}

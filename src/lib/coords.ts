@@ -5,7 +5,7 @@ export async function getCoordsFromLocation(value) {
   const data = await fetch(
     `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${MAPBOX_TOKEN}`
   ).then((r) => r.json());
-  const [lon, lat] = data.features[0].geometry.coordinates;
-  const newCoords = [lon, lat];
+  const [lng, lat] = data.features[0].geometry.coordinates;
+  const newCoords = [lng, lat];
   return newCoords;
 }

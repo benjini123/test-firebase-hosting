@@ -11,6 +11,10 @@ export function Password() {
   const [user, setUser] = useRecoilState(loginState);
   const navigate = useNavigate();
 
+  const forgotPass = () => {
+    alert("not my problem ¯_(ツ)_/¯ ");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const password = e.target.password.value;
@@ -32,7 +36,7 @@ export function Password() {
   return (
     <form className={css.passwordPage} onSubmit={handleSubmit}>
       <Input name="password">password</Input>
-      <div className={css.link}>
+      <div className={css.link} onClick={forgotPass}>
         <LinkText>olvidé mi contraseña</LinkText>
       </div>
       <Button color="#FF9DF5">Ingresar</Button>

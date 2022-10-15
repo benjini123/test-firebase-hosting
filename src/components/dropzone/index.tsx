@@ -11,7 +11,6 @@ import logoHeader from "../../media/paws.png";
 export function MyDropzone(props) {
   const [pet, setPet] = useRecoilState(petState);
   const edit = useRecoilValue(editMode);
-  console.log(pet);
 
   const onDrop = useCallback(
     (acceptedFiles) => {

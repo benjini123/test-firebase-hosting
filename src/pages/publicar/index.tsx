@@ -5,75 +5,111 @@ import { Input } from "../../ui/input";
 import { MapboxMap } from "../../components/map";
 import { MyDropzone } from "../../components/dropzone";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { editMode, petState } from "../../atoms";
+import { editMode, loginState, petState } from "../../atoms";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
-import { publishPet } from "../../lib/pets";
+import { editPet, publishPet, removePetApi } from "../../lib/pets";
+import { useEffect, useState } from "react";
 
 export function Publicar() {
-  const [pet, setCurrentPet] = useRecoilState(petState);
-  const edit = useRecoilValue(editMode);
-
+  //
   const navigate = useNavigate();
+  const edit = useRecoilValue(editMode);
+  const pet = useRecoilValue(petState);
+  const user = useRecoilValue(loginState);
+  //
+  const [coords, setCoords] = useState(null);
+  const [location, setLocation] = useState(null);
 
-  let coords: any;
-  let base64Img: any;
+  useEffect(() => {
+    if (!edit) return;
+    const { lat, lng } = pet;
+    setCoords([lat, lng]);
+    setLocation(pet.location);
+  }, []);
 
-  const handleImage = (img) => {
-    base64Img = img;
-  };
+  async function handleMapboxData(data) {
+    const { lng, lat } = data.coords;
+    setCoords([lng, lat]);
+    setLocation(data.location);
+  }
 
-  const handleChange = (data) => {
-    coords = data.coords;
+  async function removePet() {
+    const petId = pet.id;
+    removePetApi(petId);
+    navigate("/reportadas");
+  }
+
+  const cancelPublish = (e) => {
+    e.preventDefault();
+    navigate("/reportadas");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const nombre = e.target.name.value;
-    const location = e.target.location.value;
-    const url = base64Img;
-    const [latitud, longitud] = coords;
-    const petObj = { nombre, location, latitud, longitud, url };
-    publishPet(petObj).then(() => navigate("/reportadas"));
+    const { url, id } = pet;
+    const { userId } = user;
+
+    if (!nombre || !location || !url) {
+      alert("faltan datos");
+      return;
+    }
+
+    const longitud = coords[0];
+    const latitud = coords[1];
+
+    const petObj = { userId, nombre, location, latitud, longitud, url };
+    console.log(petObj);
+
+    if (edit) {
+      editPet(petObj, id).then(() => navigate("/reportadas"));
+    } else {
+      publishPet(petObj).then(() => navigate("/reportadas"));
+    }
   };
 
   return (
     <form className={css.publicarForm} onSubmit={handleSubmit}>
-      <Title>Reportar mascota perdida</Title>
+      <div style={{ marginBottom: 15, marginTop: 8 }}>
+        <Title>Reportar mascota perdida</Title>
+      </div>
       <Input name="name" value={edit ? pet.name : ""}>
         nombre
       </Input>
-      <MyDropzone
-        onLoad={(base64Img) => {
-          handleImage(base64Img);
-        }}></MyDropzone>
-
+      <MyDropzone />
       <MapboxMap
-        onChange={(data) => handleChange(data)}
+        onChange={(data) => {
+          handleMapboxData(data);
+        }}
         value={edit ? pet.location : ""}></MapboxMap>
-      <Caption>
+      <Caption style={{ marginBottom: 15 }}>
         Buscá un punto de referencia para reportar a tu mascota. Puede ser una
         dirección, un barrio o una ciudad.
       </Caption>
-      <div className={css.buttonGroup}>
-        {edit ? (
-          <div>
-            <Button color="#FF9DF5" type="submit">
-              Guardar
-            </Button>
-            <Button color="#97EA9F">Reportar como encontrado</Button>
-            <Button>
-              <LinkText color="#FF3A3A">Despublicar</LinkText>
-            </Button>
-          </div>
-        ) : (
-          <div>
-            <Button type="submit" color="#FF9DF5">
-              Reportar como perdida
-            </Button>
-            <Button color="#CDCDCD">Cancelar</Button>
-          </div>
-        )}
-      </div>
+
+      {edit ? (
+        <div className={css.buttonGroup}>
+          <Button color="#FF9DF5" type="submit">
+            Guardar
+          </Button>
+
+          <Button type="button">
+            <LinkText color="#FF3A3A" onClick={removePet}>
+              Despublicar
+            </LinkText>
+          </Button>
+        </div>
+      ) : (
+        <div className={css.buttonGroup}>
+          <Button type="submit" color="#FF9DF5">
+            Reportar como perdida
+          </Button>
+          <Button type="button" color="#CDCDCD" onClick={cancelPublish}>
+            Cancelar
+          </Button>
+        </div>
+      )}
     </form>
   );
 }

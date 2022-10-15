@@ -10,6 +10,7 @@ type PetCardProps = {
   edit?: boolean;
   onClick?: any;
   onReport?: any;
+  petId: number;
 };
 
 export function PetCard(props: PetCardProps) {

@@ -1,0 +1,11 @@
+.mapContainer{
+  height: 208px;
+  margin-top: 16px;
+}
+
+.ubicacionContainer{
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

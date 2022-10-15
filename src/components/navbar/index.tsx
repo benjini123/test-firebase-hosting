@@ -23,6 +23,13 @@ export function Navbar(props) {
     navigate("/");
   };
 
+  const goHome = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    navigate("/");
+  };
+
   function toggleDisplay() {
     setEdit(false);
     setPet({ ...pet, url: null });
@@ -39,15 +46,24 @@ export function Navbar(props) {
             onClick={() => setDisplay(false)}
           />
 
-          <Link to={token ? "/datos" : "/email"} onClick={toggleDisplay}>
+          <Link
+            to={token ? "/datos" : "/email"}
+            className={css.link}
+            onClick={toggleDisplay}>
             <Title>Mis Datos</Title>
           </Link>
 
-          <Link to={token ? "/reportadas" : "/email"} onClick={toggleDisplay}>
+          <Link
+            to={token ? "/reportadas" : "/email"}
+            className={css.link}
+            onClick={toggleDisplay}>
             <Title>Mis Reportadas</Title>
           </Link>
 
-          <Link to={token ? "/publicar" : "/email"} onClick={toggleDisplay}>
+          <Link
+            to={token ? "/publicar" : "/email"}
+            className={css.link}
+            onClick={toggleDisplay}>
             <Title>Publicar</Title>
           </Link>
 
@@ -62,7 +78,7 @@ export function Navbar(props) {
         </div>
       ) : (
         <div className={css.navContainer}>
-          <img src={paws} className={css.paws} />
+          <img src={paws} className={css.paws} onClick={goHome} />
           <div className={css.burguer} onClick={() => setDisplay(!display)}>
             <img src={rectangle} style={{ width: "40px", height: "5px" }} />
             <img src={rectangle} style={{ width: "40px", height: "5px" }} />

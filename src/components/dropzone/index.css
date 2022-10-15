@@ -7,3 +7,9 @@
   max-width: 333px;
   max-height: 142px;
 }
+
+.thumbsContainer{
+  height: 100%;
+  min-height: 154px;
+  overflow: hidden;
+}

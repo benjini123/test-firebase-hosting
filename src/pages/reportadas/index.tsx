@@ -13,16 +13,17 @@ export function Reportadas() {
   const [pets, setPets] = useState([]);
   const [pet, setCurrentPet] = useRecoilState(petState);
   const [edit, setEdit] = useRecoilState(editMode);
-
   const { userId } = useRecoilValue(loginState);
+
   useEffect(() => {
     findPets(userId).then((petList) => {
       setPets(petList);
     });
   }, []);
 
-  const handleClick = (id) => {
-    setCurrentPet(pets[id]);
+  const handleClick = (i) => {
+    const { id, lat, lng, location, name, url, userId } = pets[i];
+    setCurrentPet({ id, lat, lng, location, name, url, userId });
     setEdit(true);
     navigate("/publicar");
   };
@@ -38,6 +39,7 @@ export function Reportadas() {
               petImage={pet.url}
               petName={pet.name}
               petLocation={pet.location}
+              petId={pet.petId}
               edit={true}
               onClick={() => handleClick(id)}></PetCard>
           ))

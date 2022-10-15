@@ -21,14 +21,28 @@ export function Home() {
   }
 
   async function showForm(key) {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
     setForm(pets[key]);
   }
 
   function submitForm(data) {
+    const name = data.name.value;
+    const phone = data.phone.value;
+    const info = data.info.value;
+
+    if (!name || !phone || !info) {
+      alert("faltan datos");
+      return;
+    }
+
     const report = {
-      name: data.name.value,
-      phone: data.phone.value,
-      info: data.info.value,
+      name,
+      phone,
+      info,
       petId: form.objectID,
       userId: form.userId,
     };
@@ -39,7 +53,7 @@ export function Home() {
   }
 
   return (
-    <div className={css.homeContainer}>
+    <div className={css.homeContainer} id="top">
       {form ? (
         <ReportPetForm
           petName={form.name}
@@ -61,6 +75,7 @@ export function Home() {
               petName={e.name}
               petImage={e.url}
               petLocation={e.location}
+              petId={e.objectID}
               onReport={() => {
                 showForm(key);
               }}></PetCard>
