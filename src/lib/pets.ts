@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5656";
+const API_BASE_URL = "https://dwf-m7-app.herokuapp.com";
 
 const storage = JSON.parse(localStorage.getItem("loginData"));
 const token = storage ? storage.token : null;

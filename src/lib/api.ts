@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5656";
+const API_BASE_URL = "https://dwf-m7-app.herokuapp.com";
 
 export async function getPetsApi(latitude, longitude) {
   const pets = await fetch(
