@@ -1,4 +1,6 @@
 import { atom, selector, useRecoilState } from "recoil";
+import { recoilPersist } from "recoil-persist";
+const { persistAtom } = recoilPersist();
 
 export const petAtom = atom({
   key: "pets",
@@ -28,17 +30,12 @@ export const fileState = atom({
   default: null,
 });
 
-const loginData = JSON.parse(localStorage.getItem("loginData")) || null;
+// const loginData = JSON.parse(localStorage.getItem("loginData"));
 
 export const loginState = atom({
   key: "loginData",
-  default: {
-    email: loginData ? loginData.email : null,
-    name: loginData ? loginData.name : null,
-    password: loginData ? loginData.password : null,
-    token: loginData ? loginData.token : null,
-    userId: loginData ? loginData.userId : null,
-  },
+  default: {},
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const locationState = atom({

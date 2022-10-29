@@ -55,12 +55,14 @@ export function Datos() {
       </Input>
       <div className={css.contraseñas}>
         <Input
+          autoComplete="on"
           name="password"
           type="password"
           value={user.password ? user.password : ""}>
           Contraseña
         </Input>
         <Input
+          autoComplete="on"
           name="confirmPassword"
           type="password"
           value={user.password ? user.password : ""}>

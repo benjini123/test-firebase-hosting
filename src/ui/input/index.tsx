@@ -6,6 +6,7 @@ export function Input(props) {
     <label className={css.container}>
       <Caption>{props.children}</Caption>
       <input
+        autoComplete={props.autocomplete}
         type={props.type}
         placeholder={props.placeholder}
         onChange={props.onChange}

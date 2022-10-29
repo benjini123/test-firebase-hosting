@@ -50,7 +50,7 @@ export function Publicar() {
 
     const nombre = e.target.name.value;
     const { url, id } = pet;
-    const { userId } = user;
+    const { userId, token } = user;
 
     if (!nombre || !location || !url) {
       alert("faltan datos");
@@ -62,8 +62,6 @@ export function Publicar() {
 
     const petObj = { userId, nombre, location, latitud, longitud, url };
     console.log(petObj);
-
-    const { token } = user.token;
 
     if (edit) {
       editPet(petObj, id, token).then(() => navigate("/reportadas"));
