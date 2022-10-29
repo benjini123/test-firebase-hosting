@@ -3,7 +3,7 @@ import css from "./index.css";
 
 export function Input(props) {
   return (
-    <div className={css.container}>
+    <label className={css.container}>
       <Caption>{props.children}</Caption>
       <input
         type={props.type}
@@ -14,6 +14,6 @@ export function Input(props) {
         defaultValue={props.value}
         onKeyPress={props.onKeyPress}
       />
-    </div>
+    </label>
   );
 }
