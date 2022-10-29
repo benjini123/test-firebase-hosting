@@ -35,7 +35,8 @@ export function Publicar() {
 
   async function removePet() {
     const petId = pet.id;
-    removePetApi(petId);
+    const { token } = user;
+    removePetApi(petId, token);
     navigate("/reportadas");
   }
 
@@ -62,10 +63,12 @@ export function Publicar() {
     const petObj = { userId, nombre, location, latitud, longitud, url };
     console.log(petObj);
 
+    const { token } = user.token;
+
     if (edit) {
-      editPet(petObj, id).then(() => navigate("/reportadas"));
+      editPet(petObj, id, token).then(() => navigate("/reportadas"));
     } else {
-      publishPet(petObj).then(() => navigate("/reportadas"));
+      publishPet(petObj, token).then(() => navigate("/reportadas"));
     }
   };
 

@@ -34,11 +34,14 @@ export async function signUpApi(name, password, email) {
   return userId;
 }
 
-export async function updateUser(name, password, email) {
+export async function updateUser(name, password, email, token) {
   const updateRes = await fetch(API_BASE_URL + "/user/update", {
     method: "put",
     body: JSON.stringify({ name, password, email }),
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `bearer ${token}`,
+    },
   });
 
   const updateResData = await updateRes.json();

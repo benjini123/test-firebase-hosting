@@ -17,7 +17,7 @@ export function Datos() {
     const password = target.password.value;
     const confirmPassword = target.confirmPassword.value;
     const name = target.name.value;
-    const email = user.email;
+    const { email, token } = user.email;
 
     if (name == "" || password == "") {
       throw window.alert(
@@ -29,8 +29,8 @@ export function Datos() {
       throw window.alert("Las contraseñas deben coincidir");
     }
 
-    if (user.token) {
-      await updateUser(name, password, email);
+    if (token) {
+      await updateUser(name, password, email, token);
       setUser({ ...user, name, password });
       navigate("/");
     } else {

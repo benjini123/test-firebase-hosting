@@ -13,10 +13,10 @@ export function Reportadas() {
   const [pets, setPets] = useState([]);
   const [pet, setCurrentPet] = useRecoilState(petState);
   const [edit, setEdit] = useRecoilState(editMode);
-  const { userId } = useRecoilValue(loginState);
+  const { userId, token } = useRecoilValue(loginState);
 
   useEffect(() => {
-    findPets(userId).then((petList) => {
+    findPets(userId, token).then((petList) => {
       setPets(petList);
     });
   }, []);
