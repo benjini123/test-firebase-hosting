@@ -54,11 +54,15 @@ export function Datos() {
         Nombre
       </Input>
       <div className={css.contraseñas}>
-        <Input name="password" value={user.password ? user.password : ""}>
+        <Input
+          name="password"
+          type="password"
+          value={user.password ? user.password : ""}>
           Contraseña
         </Input>
         <Input
           name="confirmPassword"
+          type="password"
           value={user.password ? user.password : ""}>
           repetir contraseña
         </Input>
