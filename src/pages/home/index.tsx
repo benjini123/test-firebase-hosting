@@ -83,6 +83,13 @@ export function Home() {
         })
       ) : (
         <div>
+          <Caption>no hay mascotas perdidas cerca tuyo</Caption>
+        </div>
+      )}
+      {pets ? (
+        ""
+      ) : (
+        <div>
           <Caption>
             Para ver las mascotas reportadas cerca tuyo necesitamos permiso para
             conocer tu ubicación.
