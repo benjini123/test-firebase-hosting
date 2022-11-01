@@ -30,6 +30,12 @@ export const fileState = atom({
   default: null,
 });
 
+export const userCoordinates = atom({
+  key: "coords",
+  default: null,
+  effects_UNSTABLE: [persistAtom],
+});
+
 // const loginData = JSON.parse(localStorage.getItem("loginData"));
 
 export const loginState = atom({

@@ -2,23 +2,35 @@ import { Caption, Title } from "../../ui/texts";
 import { Button } from "../../ui/button";
 import css from "./index.css";
 import { PetCard } from "../../components/pet-card";
-import { petAtom } from "../../atoms";
+import { petAtom, userCoordinates } from "../../atoms";
 import { useRecoilState } from "recoil";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getPetsApi, setFormApi } from "../../lib/api";
 import { ReportPetForm } from "../../components/reportPet";
 
 export function Home() {
   const [pets, setPets] = useState(null);
   const [form, setForm] = useState(null);
+  const [coords, setCoords] = useRecoilState(userCoordinates);
 
   async function handleClick() {
     window.navigator.geolocation.getCurrentPosition(async (position: any) => {
       const { latitude, longitude } = position.coords;
-      const petData = await getPetsApi(latitude, longitude);
-      setPets(petData);
+      setCoords([latitude, longitude]);
     });
   }
+
+  useEffect(() => {
+    if (coords) {
+      const fetchData = async () => {
+        const latitude = coords[0];
+        const longitude = coords[1];
+        const petData = await getPetsApi(latitude, longitude);
+        setPets(petData);
+      };
+      fetchData().catch(console.error);
+    }
+  }, [coords]);
 
   async function showForm(key) {
     window.scroll({
@@ -67,28 +79,7 @@ export function Home() {
         ""
       )}
       <Title>Mascotas perdidas cerca tuyo</Title>
-      {pets ? (
-        pets.map((e: any, key) => {
-          return (
-            <PetCard
-              key={key}
-              petName={e.name}
-              petImage={e.url}
-              petLocation={e.location}
-              petId={e.objectID}
-              onReport={() => {
-                showForm(key);
-              }}></PetCard>
-          );
-        })
-      ) : (
-        <div>
-          <Caption>no hay mascotas perdidas cerca tuyo</Caption>
-        </div>
-      )}
-      {pets ? (
-        ""
-      ) : (
+      {!coords ? (
         <div>
           <Caption>
             Para ver las mascotas reportadas cerca tuyo necesitamos permiso para
@@ -101,6 +92,25 @@ export function Home() {
             color="#FF9DF5">
             Dar mi ubicacion
           </Button>
+        </div>
+      ) : pets ? (
+        pets.map((e: any, key) => {
+          return (
+            <PetCard
+              key={key}
+              petName={e.name}
+              petImage={e.url}
+              petLocation={e.location}
+              petId={e.objectID}
+              onReport={() => {
+                showForm(key);
+              }}
+            />
+          );
+        })
+      ) : (
+        <div>
+          <Caption>no hay mascotas perdidas cerca tuyo</Caption>
         </div>
       )}
     </div>

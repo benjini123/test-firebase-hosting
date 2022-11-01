@@ -35,7 +35,9 @@ export function Password() {
 
   return (
     <form className={css.passwordPage} onSubmit={handleSubmit}>
-      <Input name="password">password</Input>
+      <Input name="password" type="password" autoComplete="on">
+        password
+      </Input>
       <div className={css.link} onClick={forgotPass}>
         <LinkText>olvidé mi contraseña</LinkText>
       </div>
