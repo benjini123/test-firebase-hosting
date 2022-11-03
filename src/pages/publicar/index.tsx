@@ -36,7 +36,8 @@ export function Publicar() {
   async function removePet() {
     const petId = pet.id;
     const { token } = user;
-    removePetApi(petId, token);
+    await removePetApi(petId, token);
+    console.log("pet with id: " + petId + " has been removed from database");
     navigate("/reportadas");
   }
 
@@ -61,12 +62,17 @@ export function Publicar() {
     const latitud = coords[1];
 
     const petObj = { userId, nombre, location, latitud, longitud, url };
-    console.log(petObj);
 
     if (edit) {
-      editPet(petObj, id, token).then(() => navigate("/reportadas"));
+      editPet(petObj, id, token).then(() => {
+        console.log({ petEdit: petObj });
+        navigate("/reportadas");
+      });
     } else {
-      publishPet(petObj, token).then(() => navigate("/reportadas"));
+      publishPet(petObj, token).then(() => {
+        console.log({ newPet: petObj });
+        navigate("/reportadas");
+      });
     }
   };
 

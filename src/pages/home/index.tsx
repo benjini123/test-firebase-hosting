@@ -9,7 +9,7 @@ import { getPetsApi, setFormApi } from "../../lib/api";
 import { ReportPetForm } from "../../components/reportPet";
 
 export function Home() {
-  const [pets, setPets] = useState(null);
+  const [pets, setPets] = useState([]);
   const [form, setForm] = useState(null);
   const [coords, setCoords] = useRecoilState(userCoordinates);
 
@@ -93,7 +93,7 @@ export function Home() {
             Dar mi ubicacion
           </Button>
         </div>
-      ) : pets ? (
+      ) : pets.length > 0 ? (
         pets.map((e: any, key) => {
           return (
             <PetCard

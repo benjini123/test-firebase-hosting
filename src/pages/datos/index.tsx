@@ -17,7 +17,7 @@ export function Datos() {
     const password = target.password.value;
     const confirmPassword = target.confirmPassword.value;
     const name = target.name.value;
-    const { email, token } = user.email;
+    const { email, token } = user;
 
     if (name == "" || password == "") {
       throw window.alert(
@@ -31,19 +31,17 @@ export function Datos() {
 
     if (token) {
       await updateUser(name, password, email, token);
+      console.log("user has been updated");
       setUser({ ...user, name, password });
       navigate("/");
     } else {
       const userId = await signUpApi(name, password, email);
       const token = await signIn(email, password);
 
-      localStorage.setItem(
-        "loginData",
-        JSON.stringify({ name, email, password, userId, token })
-      );
-
       setUser({ ...user, name, password, token, userId });
-      console.log("user with name: " + name + "has successfully been created");
+      console.log(
+        "user with name: '" + name + "' has successfully been created"
+      );
       navigate("/");
     }
   };

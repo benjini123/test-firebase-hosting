@@ -36,8 +36,6 @@ export const userCoordinates = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-// const loginData = JSON.parse(localStorage.getItem("loginData"));
-
 export const loginState = atom({
   key: "loginData",
   default: {},
@@ -60,23 +58,3 @@ export const loginDataSelector = selector({
     }
   },
 });
-
-// export const queryState = atom({
-//   key: "query",
-//   default: "",
-// });
-
-// export const resultsState = selector({
-//   key: "locationResults",
-//   get: async ({ get }) => {
-//     const valorDeQuery = get(queryState);
-//     if (valorDeQuery) {
-//       const res = await fetch(valorDeQuery);
-//       const json = await res.json();
-
-//       return json.results;
-//     } else {
-//       return [];
-//     }
-//   },
-// });

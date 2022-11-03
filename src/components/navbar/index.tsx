@@ -4,7 +4,7 @@ import rectangle from "../../media/rectangle.png";
 import css from "./index.css";
 import cross from "../../media/vector.png";
 import { Subtitle, Title } from "../../ui/texts";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { LinkText } from "../../ui/texts";
 import { editMode, loginState, petState } from "../../atoms";
@@ -18,6 +18,7 @@ export function Navbar(props) {
   const navigate = useNavigate();
 
   const signOut = () => {
+    localStorage.removeItem("recoil-persist");
     localStorage.removeItem("loginData");
     window.location.reload();
     navigate("/");

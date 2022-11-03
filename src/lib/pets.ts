@@ -1,7 +1,6 @@
 const API_BASE_URL = "https://dwf-m7-app.herokuapp.com";
 
 export async function publishPet(pet, token) {
-  console.log(token);
   const data = await fetch(API_BASE_URL + "/mascotas", {
     method: "post",
     body: JSON.stringify(pet),

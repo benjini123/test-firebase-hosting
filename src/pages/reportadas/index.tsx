@@ -32,7 +32,7 @@ export function Reportadas() {
     <section className={css.reportadasPage}>
       <Title>Mis mascotas reportadas</Title>
       <div className={css.petsContainer}>
-        {pets ? (
+        {pets.length > 0 ? (
           pets.map((pet, id) => (
             <PetCard
               key={id}

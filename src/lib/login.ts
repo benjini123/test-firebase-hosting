@@ -22,8 +22,6 @@ export async function signIn(email, password) {
 }
 
 export async function signUpApi(name, password, email) {
-  console.log(name, password, email);
-
   const auth = await fetch(API_BASE_URL + "/auth", {
     method: "post",
     body: JSON.stringify({ name, password, email }),
