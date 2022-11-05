@@ -33,7 +33,7 @@ export async function signUpApi(name, password, email) {
 }
 
 export async function updateUser(name, password, email, token) {
-  const updateRes = await fetch(API_BASE_URL + "/user/update", {
+  const updateRes = await fetch(API_BASE_URL + "/update/user", {
     method: "put",
     body: JSON.stringify({ name, password, email }),
     headers: {

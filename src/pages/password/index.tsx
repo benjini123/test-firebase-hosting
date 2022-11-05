@@ -22,10 +22,6 @@ export function Password() {
 
     const token = await signIn(email, password);
     if (token) {
-      localStorage.setItem(
-        "loginData",
-        JSON.stringify({ token, password, email, name, userId })
-      );
       setUser({ ...user, token, password });
       navigate("/");
     } else {

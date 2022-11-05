@@ -9,15 +9,7 @@ export const petAtom = atom({
 
 export const petState = atom({
   key: "currentPet",
-  default: {
-    id: null,
-    url: null,
-    name: null,
-    location: null,
-    lat: null,
-    lng: null,
-    userId: null,
-  },
+  default: null,
 });
 
 export const editMode = atom({

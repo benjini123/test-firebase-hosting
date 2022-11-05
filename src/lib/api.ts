@@ -10,7 +10,6 @@ export async function getPetsApi(latitude, longitude) {
 }
 
 export async function setFormApi(data) {
-  console.log({ ReportData: data });
   const createReport = await fetch(API_BASE_URL + "/report", {
     method: "POST",
     body: JSON.stringify(data),
@@ -18,4 +17,6 @@ export async function setFormApi(data) {
       "Content-Type": "application/json",
     },
   });
+  const createReportData = await createReport.json();
+  return createReportData;
 }

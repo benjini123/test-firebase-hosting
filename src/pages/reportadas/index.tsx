@@ -22,8 +22,7 @@ export function Reportadas() {
   }, []);
 
   const handleClick = (i) => {
-    const { id, lat, lng, location, name, url, userId } = pets[i];
-    setCurrentPet({ id, lat, lng, location, name, url, userId });
+    setCurrentPet(pets[i]);
     setEdit(true);
     navigate("/publicar");
   };

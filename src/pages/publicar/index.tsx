@@ -19,6 +19,8 @@ export function Publicar() {
   //
   const [coords, setCoords] = useState(null);
   const [location, setLocation] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [removed, setRemoved] = useState(false);
 
   useEffect(() => {
     if (!edit) return;
@@ -34,6 +36,9 @@ export function Publicar() {
   }
 
   async function removePet() {
+    if (removed) return;
+    setRemoved(true);
+
     const petId = pet.id;
     const { token } = user;
     await removePetApi(petId, token);
@@ -49,6 +54,9 @@ export function Publicar() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (submitted) return;
+    setSubmitted(true);
+
     const nombre = e.target.name.value;
     const { url, id } = pet;
     const { userId, token } = user;
@@ -62,14 +70,17 @@ export function Publicar() {
     const latitud = coords[1];
 
     const petObj = { userId, nombre, location, latitud, longitud, url };
-
     if (edit) {
       editPet(petObj, id, token).then(() => {
+        console.log(
+          "pet with id: " + id + " has been succesfully edited on the database!"
+        );
         console.log({ petEdit: petObj });
         navigate("/reportadas");
       });
     } else {
       publishPet(petObj, token).then(() => {
+        console.log("a new pet has been succesfully reported on the database!");
         console.log({ newPet: petObj });
         navigate("/reportadas");
       });

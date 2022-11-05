@@ -5,17 +5,27 @@ import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import css from "./index.css";
 import { getCoordsFromLocation } from "../../lib/coords";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { editMode, petAtom, petState, userCoordinates } from "../../atoms";
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiYmVuamFoZW5sZXkiLCJhIjoiY2wzNHYxMTc0MDA1bTNicGNxZDB0bDlhayJ9.D3sJZ0xb27ISehSHAGvaIg";
 
 export function MapboxMap(props) {
   //
+  const pet = useRecoilValue(petState);
+  const edit = useRecoilValue(editMode);
+  const userCoords = useRecoilValue(userCoordinates);
   const mapContainer = useRef(null);
   const map = useRef(null);
+
   const [loc, setLoc] = useState(null);
-  const [lng, setLng] = useState(-58.38162);
-  const [lat, setLat] = useState(-34.60376);
-  const [zoom, setZoom] = useState(9);
+  const [marker, setMarker] = useState(new mapboxgl.Marker());
+  const [lat, setLat] = useState(
+    edit ? pet.lat : userCoords ? userCoords[0] : -34.60376
+  );
+  const [lng, setLng] = useState(
+    edit ? pet.lng : userCoords ? userCoords[1] : -58.38162
+  );
 
   mapboxgl.accessToken = MAPBOX_TOKEN;
 
@@ -25,12 +35,12 @@ export function MapboxMap(props) {
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [lng, lat],
-      zoom: zoom,
+      zoom: 9,
     });
   }, [mapContainer]);
 
   useEffect(() => {
-    new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
+    setMarker(marker.setLngLat([lng, lat]).addTo(map.current));
   }, [lng]);
 
   async function handleSearch(e) {

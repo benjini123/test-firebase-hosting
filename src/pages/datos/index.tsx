@@ -19,7 +19,7 @@ export function Datos() {
     const name = target.name.value;
     const { email, token } = user;
 
-    if (name == "" || password == "") {
+    if (name === "" || password === "") {
       throw window.alert(
         "el nombre o la contraseña no pueden quedar en blanco"
       );
@@ -29,18 +29,24 @@ export function Datos() {
       throw window.alert("Las contraseñas deben coincidir");
     }
 
+    if (user.password === password && user.name === name) {
+      throw window.alert("no se han modificado los datos del usuario");
+    }
+
     if (token) {
       await updateUser(name, password, email, token);
-      console.log("user has been updated");
       setUser({ ...user, name, password });
+      console.log("user " + name + " has been updated");
       navigate("/");
     } else {
+      console.log("paso por setUser");
+
       const userId = await signUpApi(name, password, email);
       const token = await signIn(email, password);
 
       setUser({ ...user, name, password, token, userId });
       console.log(
-        "user with name: '" + name + "' has successfully been created"
+        "user with id: '" + userId + "' has successfully been created"
       );
       navigate("/");
     }

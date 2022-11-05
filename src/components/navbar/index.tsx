@@ -19,8 +19,8 @@ export function Navbar(props) {
 
   const signOut = () => {
     localStorage.removeItem("recoil-persist");
-    localStorage.removeItem("loginData");
     window.location.reload();
+    console.log("goodbye " + user.name + "!!");
     navigate("/");
   };
 

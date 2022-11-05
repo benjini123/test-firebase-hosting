@@ -2,7 +2,7 @@ import { Caption, Title } from "../../ui/texts";
 import { Button } from "../../ui/button";
 import css from "./index.css";
 import { PetCard } from "../../components/pet-card";
-import { petAtom, userCoordinates } from "../../atoms";
+import { loginState, petAtom, userCoordinates } from "../../atoms";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { getPetsApi, setFormApi } from "../../lib/api";
@@ -12,6 +12,7 @@ export function Home() {
   const [pets, setPets] = useState([]);
   const [form, setForm] = useState(null);
   const [coords, setCoords] = useRecoilState(userCoordinates);
+  const [user, setUser] = useRecoilState(loginState);
 
   async function handleClick() {
     window.navigator.geolocation.getCurrentPosition(async (position: any) => {
@@ -59,8 +60,12 @@ export function Home() {
       userId: form.userId,
     };
 
-    setFormApi(report).then(() => {
-      setForm(null);
+    setFormApi(report).then((res) => {
+      if (res) {
+        console.log("Report has succesfully been created!!");
+        console.log({ ReportData: report });
+        setForm(null);
+      }
     });
   }
 

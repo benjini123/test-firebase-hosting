@@ -18,7 +18,9 @@ export function PetCard(props: PetCardProps) {
     <div className={css.cardContainer}>
       <img src={props.petImage} className={css.image} />
       <div className={css.textContainer}>
-        <Title>{props.petName}</Title>
+        <div className={css.titleCont}>
+          <Title>{props.petName}</Title>
+        </div>
         <Caption>{props.petLocation}</Caption>
       </div>
       {props.edit ? (
