@@ -14,11 +14,13 @@
   display: flex;
   flex-direction: column;
   gap: 9px;
+  cursor: pointer;
 }
 
 .paws{
   width: 40px;
   height: 35px;
+  cursor: pointer;
 }
 
 .cross{
@@ -27,10 +29,12 @@
   top:20px;
   width: 40px;
   height: 40px;
+  cursor: pointer;
 }
 
 .link{
   text-decoration: none;
+  cursor: pointer;
 }
 
 .displayedNavBar{
@@ -46,4 +50,12 @@
   justify-content: center;
   align-items: center;
   z-index: 4;
+}
+
+
+.session{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap:10px
 }

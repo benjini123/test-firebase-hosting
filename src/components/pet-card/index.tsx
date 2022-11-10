@@ -1,7 +1,6 @@
 import { Caption, LinkText, Text, Title } from "../../ui/texts";
 import css from "./index.css";
 import pen from "../../media/pen.png";
-import { MouseEventHandler } from "react";
 
 type PetCardProps = {
   petName: string;

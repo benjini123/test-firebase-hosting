@@ -69,7 +69,7 @@ export function Navbar(props) {
           </Link>
 
           {token ? (
-            <div>
+            <div className={css.session}>
               <Subtitle>{user.email}</Subtitle>
               <LinkText onClick={signOut}>cerrar sesion</LinkText>
             </div>

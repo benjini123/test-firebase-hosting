@@ -41,6 +41,7 @@
   color: #40AFFF;
   text-decoration-line: underline;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .caption{
